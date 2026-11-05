@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Zapisy na Konsultacje</title>
+</head>
+<body>
+  <h1>Zapisy na Konsultacje</h1>
+  <h2>Prowadzący:</h2>
+  <p id="prowadzacy">Ładowanie...</p>
+
+  <script>
+    fetch('/api/prowadzacy')
+      .then(odpowiedz => odpowiedz.json())
+      .then(dane => {
+        document.getElementById('prowadzacy').textContent =
+          dane[0].imie + ' ' + dane[0].nazwisko;
+      });
+  </script>
+</body>
+</html>
