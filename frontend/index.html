@@ -14,7 +14,7 @@
       .then(odpowiedz => odpowiedz.json())
       .then(dane => {
         document.getElementById('prowadzacy').textContent =
-          dane[0].imie + ' ' + dane[0].nazwisko;
+          dane.map(p=>p.imie + ' ' + p.nazwisko).join(', ');
       });
   </script>
 </body>
