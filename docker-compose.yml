@@ -12,23 +12,30 @@ services:
       interval: 5s
       retries: 10
 
-      
   backend:
     build: ./backend
     environment:
+      NODE_ENV: production
+      PORT: 3000
       DB_HOST: baza
+      DB_PORT: 5432
       DB_USER: konsultacje
       DB_PASSWORD: konsultacje
       DB_NAME: konsultacje
     depends_on:
       baza:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 5s
+      retries: 10
     ports:
-      - "3001:3000"
+      - "3000:3000"
 
   frontend:
     build: ./frontend
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     ports:
-      - "8080:80"
+      - "8081:80"

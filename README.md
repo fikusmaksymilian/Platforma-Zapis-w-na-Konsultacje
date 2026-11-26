@@ -13,3 +13,7 @@ Jest to projekt zaliczeniowy z przedsmiotu Metody Wirtualizacji, a zarazem aplik
 Skorzystałem z AI jako pomocy w nauce, wyjaśniło mi jak zbudować aplikacje wielokontenerową w DOckerze, jak napisać Dockerfile
 dla backendu i frontendu zeby to realnie działało, oraz jak skonfigurować docker-compose i jak ustawić nginx jako reverse proxy.
 
+#KM2:
+Ai zasugerowało mi aby w package.json, zamiast wersji 4 express uzyc wersji Express 5. Do automatycznej obslugi bledow 500 przy async.
+Rowniez zasugerowalo mi dodanie NODE_ENV: production w package.json aby przy bledzie zwracalo internal server error a nie dlugi kod bledu. 
+
