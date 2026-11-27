@@ -81,3 +81,18 @@ Udokumentowany format wymiany danych:
     Keep-Alive: timeout=5
 
     {"usunieto":{"id":2,"imie":"Robert","nazwisko":"Lewandowski"}}
+
+8. curl.exe http://localhost:3000/api/terminy
+
+    [{"id":1,"imie":"Valeryi","nazwisko":"Chodemczuk","dzien":"Poniedziałek","godzina":"10:00","sala":"A-101"}]
+
+Baza danych
+
+Obraz: postgres:16-alpine
+Dane trwałe na nazwanym wolumenie dane-bazy
+Skrypt init.sql tworzy tabele i dane startowe
+Baza nie ma opublikowanego portu backend łączy się z nią przez sieć compose
+
+Tabele:
+prowadzacy (id, imie, nazwisko)
+terminy (id, prowadzacy_id → prowadzacy.id, dzien, godzina, sala) jeden prowadzący ma wiele terminów
