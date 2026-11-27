@@ -84,7 +84,7 @@ Udokumentowany format wymiany danych:
 
 8. curl.exe http://localhost:3000/api/terminy
 
-    [{"id":1,"imie":"Valeryi","nazwisko":"Chodemczuk","dzien":"Poniedziałek","godzina":"10:00","sala":"A-101"}]
+    {"id":1,"imie":"Valeryi","nazwisko":"Chodemczuk","dzien":"Poniedziałek","godzina":"10:00","sala":"A-101"}
 
 Baza danych
 
@@ -95,4 +95,4 @@ Baza nie ma opublikowanego portu backend łączy się z nią przez sieć compose
 
 Tabele:
 prowadzacy (id, imie, nazwisko)
-terminy (id, prowadzacy_id → prowadzacy.id, dzien, godzina, sala) jeden prowadzący ma wiele terminów
+terminy (id, prowadzacy_id -> prowadzacy.id, dzien, godzina, sala) jeden prowadzący ma wiele terminów
