@@ -9,13 +9,56 @@
   <h2>Prowadzący:</h2>
   <p id="prowadzacy">Ładowanie...</p>
 
+
+  <h3>Dodaj prowadzącego</h3>
+  <input id="imie" placeholder="Imię">
+  <input id="nazwisko" placeholder="Nazwisko">
+  <button onclick="dodaj()">Dodaj</button>
+
+  <h3>Szukaj / Usuń po ID</h3>
+  <input id="podaneId" type="number" placeholder="ID">
+  <button onclick="szukaj()">Szukaj</button>
+  <button onclick="usun()">Usuń</button>
+  <p id="wynik"></p>
+
+
   <script>
     fetch('/api/prowadzacy')
       .then(odpowiedz => odpowiedz.json())
       .then(dane => {
         document.getElementById('prowadzacy').textContent =
-          dane[0].imie + ' ' + dane[0].nazwisko;
+          dane.map(p=>p.imie + ' ' + p.nazwisko).join(', ');
       });
+
+    function dodaj() {
+      fetch('/api/prowadzacy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ imie: imie.value, nazwisko: nazwisko.value })
+      })
+        .then(odpowiedz => odpowiedz.json())
+        .then(dane => {
+          wynik.textContent = `Dodano: [${dane.id}] ${dane.imie} ${dane.nazwisko}`;
+        });
+    }
+
+    function szukaj() {
+      fetch('/api/prowadzacy/' + podaneId.value)
+        .then(odpowiedz => odpowiedz.json())
+        .then(dane => {
+          wynik.textContent = `Znaleziono: [${dane.id}] ${dane.imie} ${dane.nazwisko}`;
+        });
+    }
+
+    function usun() {
+      fetch('/api/prowadzacy/' + podaneId.value, { method: 'DELETE' })
+        .then(odpowiedz => odpowiedz.json())
+        .then(dane => {
+          wynik.textContent = `Usunięto: [${dane.usunieto.id}] ${dane.usunieto.imie} ${dane.usunieto.nazwisko}`;
+        });
+    }
+
+
   </script>
 </body>
 </html>
