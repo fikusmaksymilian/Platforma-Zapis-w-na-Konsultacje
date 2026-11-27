@@ -50,4 +50,12 @@ app.delete('/api/prowadzacy/:id', async (req, res) =>{
   res.json({ usunieto: wynik.rows[0] });
 });
 
+app.get('/api/terminy', async (req, res) => {
+  const wynik = await pool.query(
+    'SELECT t.id, p.imie, p.nazwisko, t.dzien, t.godzina, t.sala ' +
+    'FROM terminy t JOIN prowadzacy p ON p.id = t.prowadzacy_id ORDER BY t.id'
+  );
+  res.json(wynik.rows);
+});
+
 app.listen(process.env.PORT, () => console.log('Backend dziala na porcie ' + process.env.PORT));

@@ -8,6 +8,8 @@
   <h1>Zapisy na Konsultacje</h1>
   <h2>Prowadzący:</h2>
   <p id="prowadzacy">Ładowanie...</p>
+  <h2>Terminy konsultacji:</h2>
+  <ul id="terminy"></ul>
 
 
   <h3>Dodaj prowadzącego</h3>
@@ -28,6 +30,13 @@
       .then(dane => {
         document.getElementById('prowadzacy').textContent =
           dane.map(p=>p.imie + ' ' + p.nazwisko).join(', ');
+      });
+    fetch('/api/terminy')
+      .then(odpowiedz => odpowiedz.json())
+      .then(dane => {
+        document.getElementById('terminy').innerHTML = dane
+          .map(t => '<li>' + t.imie + ' ' + t.nazwisko + ' – ' + t.dzien + ' ' + t.godzina + ', sala ' + t.sala + '</li>')
+          .join('');
       });
 
     function dodaj() {
